@@ -8,7 +8,14 @@ routes.get('/items', async (request, response) => {
     para aguardar a query terminar, para então ter os resultados. Para usar o await é necessário ter o async */
     const items = await knex('items').select('*');
 
-    return response.json(items)
+    const serializedItems = items.map(item => {
+        return {
+            title: item.title,
+            image_url: 'http://localhost:3333/uploads/${item.image}',
+        };
+    });
+
+    return response.json(serializedItems)
 });
 
 export default routes;
