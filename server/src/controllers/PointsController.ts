@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 class PointsController {
     async index(request: Request, response: Response) {
-        // ciade, uf, items
+        // cidade, uf, items
         const { city, uf, items } = request.query;
 
         const parsedItems = String(items)
@@ -17,7 +17,7 @@ class PointsController {
         .where('city', String(city))
         .where('uf', String(uf))
         .distinct()
-        .select('points.*')
+        .select('points.*');
 
         return response.json(points);
     }
@@ -80,11 +80,13 @@ class PointsController {
         const pointItems = items.map((item_id: number) => {
             return {
                 item_id,
-                point_id
+                point_id,
             };
-        });
+        })
     
         await trx('point_items').insert(pointItems);
+
+        await trx.commit();
     
         return response.json({ 
             id: point_id,
@@ -92,4 +94,5 @@ class PointsController {
         });
     }
 }
+
 export default PointsController;
