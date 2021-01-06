@@ -1,7 +1,9 @@
 import express from 'express';
-import knex from './database/connection'
+import knex from './database/connection';
+import PointsController from './controllers/PointsController';
 
 const routes = express.Router();
+const pointsControllers = new PointsController();
 
 routes.get('/items', async (request, response) => {
     /* await: sempre que for usar uma query para o banco de dados é bom usar await,
@@ -19,41 +21,6 @@ routes.get('/items', async (request, response) => {
     return response.json(serializedItems)
 });
 // Criação de ponto de Coleta. Post -> Criar
-routes.post('/points', async (request, response) => {
-    const {
-        name,
-        email,
-        whatsapp,
-        latitude,
-        longitude,
-        city,
-        uf,
-        items
-    } = request.body;
-
-    const insertedIds = await knex('points').insert({
-        image: 'image-fake',
-        name,
-        email,
-        whatsapp,
-        latitude,
-        longitude,
-        city,
-        uf
-    });
-
-    const point_id = insertedIds[0];
-
-    const pointItems = items.map((item_id: number) => {
-        return {
-            item_id,
-            point_id
-        };
-    });
-
-    await knex('point_items').insert(pointItems);
-
-    return response.json({ sucess: true});
-});
+routes.post('/points', pointsControllers.create);
 
 export default routes;
