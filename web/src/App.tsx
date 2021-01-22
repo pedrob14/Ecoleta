@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
 
-import Home from './pages/home'
+import Routes from './routes';
+import CreatePoint from './pages/CreatePoint'
 
 function App() {
   return (
-    <Home />
+    <Routes />
   );
 }
 export default App;
