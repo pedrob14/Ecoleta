@@ -1,4 +1,5 @@
 import React from 'react';
+import { Feather as Icon} from '@expo/vector-icons';
 import {
     View,
     ImageBackground,
@@ -25,7 +26,7 @@ const Home = () => {
             <RectButton style={styles.button} onPress={() => {}}>
                 <View style={styles.buttonIcon}>
                     <Text>
-                        -
+                        <Icon name="arrow-right" color="#fff" size={24} />
                     </Text>
                 </View>
                 <Text style={styles.buttonText}>
