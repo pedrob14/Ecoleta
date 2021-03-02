@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native'
 const Home = () => {
     const navigation = useNavigation();
 
-    function handleNagigateToPoints() {
+    function handleNavigateToPoints() {
         navigation.navigate('Points');
     }
 
@@ -30,7 +30,7 @@ const Home = () => {
         </View>
 
         <View style={styles.footer}>
-            <RectButton style={styles.button} onPress={handleNagigateToPoints}>
+            <RectButton style={styles.button} onPress={handleNavigateToPoints}>
                 <View style={styles.buttonIcon}>
                     <Text>
                         <Icon name="arrow-right" color="#fff" size={24} />
